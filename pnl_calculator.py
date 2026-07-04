@@ -1,5 +1,13 @@
 # Trade PNL Calculation
 
+
+#Calculate PNL
+def calculate_pnl(entry, exit_price, margin, long_position):
+    change_percent = abs(((exit_price - entry) / entry) * 100)
+    pnl = abs((change_percent * margin) / 100)
+    return change_percent, pnl
+
+
 while True:
     # User Entry Exit level
     pos_entry = float(input("Entry Price:"))
@@ -8,13 +16,10 @@ while True:
 
     #User position Margin
     amount = float(input("Position Margin: "))
-
-    #Calculate PNL
-    change_percent = abs(((pos_exit - pos_entry) / pos_entry) * 100)
-    pnl = abs((change_percent * amount) / 100)
+    
+    change_percent, pnl = calculate_pnl(pos_entry, pos_exit, amount, is_long)
 
     # Display Results
-
     if is_long:
         if pos_exit > pos_entry:
             print(f"Profit: ${pnl:.2f}\nPercentage Change: {change_percent:.2f}%")
