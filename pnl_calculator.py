@@ -12,6 +12,7 @@ def calculate_pnl(entry, exit_price, margin, long_position):
     return change_percent, pnl
 
 positions = []
+winrate_count = 0
 
 while True:
     # User Entry Exit level
@@ -25,7 +26,6 @@ while True:
     change_percent, pnl = calculate_pnl(pos_entry, pos_exit, amount, is_long)
 
     # Display Results
-    
     if pnl > 0:
         print(f"Profit: ${pnl:.2f}\nPercentage Change: {change_percent:.2f}%")
     elif pnl < 0:
@@ -37,3 +37,7 @@ while True:
     print(f"\nTotal Positions Calculated: {len(positions)} \nTotal PNL: ${sum(positions):.2f}")
     if input("Do you want to calculate another trade? (yes/no): ").strip().lower() != 'yes':
         break    
+for winrate in positions:
+    if winrate > 0:
+        winrate_count += 1
+print(f"Win Rate: {(winrate_count/len(positions))*100:.2f}% ({winrate_count}/{len(positions)} trades)")
