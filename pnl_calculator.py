@@ -33,11 +33,11 @@ while True:
     else:
         print(f"No Profit or Loss: ${pnl:.2f}\nPercentage Change: {change_percent:.2f}%")
 
-    positions.append(pnl)
-    print(f"\nTotal Positions Calculated: {len(positions)} \nTotal PNL: ${sum(positions):.2f}")
+    positions.append({"entry": pos_entry, "exit": pos_exit, "is_long": is_long, "pnl": pnl})
+    print(f"\nTotal Positions Calculated: {len(positions)} \nTotal PNL: ${sum([pos['pnl'] for pos in positions]):.2f}")
     if input("Do you want to calculate another trade? (yes/no): ").strip().lower() != 'yes':
         break    
 for winrate in positions:
-    if winrate > 0:
+    if winrate['pnl'] > 0:
         winrate_count += 1
 print(f"Win Rate: {(winrate_count/len(positions))*100:.2f}% ({winrate_count}/{len(positions)} trades)")
