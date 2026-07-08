@@ -41,3 +41,7 @@ for winrate in positions:
     if winrate['pnl'] > 0:
         winrate_count += 1
 print(f"Win Rate: {(winrate_count/len(positions))*100:.2f}% ({winrate_count}/{len(positions)} trades)")
+
+with open("trade_history.txt", "w") as f:
+    for pos in positions:
+        f.write(f"Entry: {pos['entry']}, Exit: {pos['exit']}, Long Position: {pos['is_long']}, PNL: {pos['pnl']:.2f}\n")
