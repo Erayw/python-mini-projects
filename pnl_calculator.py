@@ -16,8 +16,18 @@ winrate_count = 0
 
 while True:
     # User Entry Exit level
-    pos_entry = float(input("Entry Price:"))
-    pos_exit = float(input("Exit Price:"))
+    try:
+        pos_entry = float(input("Entry Price:"))
+    except ValueError:
+        print("Invalid entry price. Please enter a valid number.")
+        continue
+
+    try:
+        pos_exit = float(input("Exit Price:"))
+    except ValueError:
+        print("Invalid exit price. Please enter a valid number.")
+        continue
+
     is_long = input("Is it a long position? (yes/no): ").strip().lower() == 'yes'
 
     #User position Margin
