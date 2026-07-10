@@ -18,6 +18,9 @@ while True:
     # User Entry Exit level
     try:
         pos_entry = float(input("Entry Price:"))
+        if pos_entry == 0:
+            print("Entry price cannot be zero.")
+            continue
     except ValueError:
         print("Invalid entry price. Please enter a valid number.")
         continue
@@ -31,8 +34,12 @@ while True:
     is_long = input("Is it a long position? (yes/no): ").strip().lower() == 'yes'
 
     #User position Margin
-    amount = float(input("Position Margin: "))
-    
+    try:
+        amount = float(input("Position Margin: "))
+    except ValueError:
+        print("Invalid margin amount. Please enter a valid number.")
+        continue
+
     change_percent, pnl = calculate_pnl(pos_entry, pos_exit, amount, is_long)
 
     # Display Results
